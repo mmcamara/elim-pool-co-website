@@ -1,0 +1,10 @@
+# Clean URLs — /about → /about.html
+/about            /about.html           200
+/services         /services.html        200
+/privacy-policy   /privacy-policy.html  200
+/terms-conditions /terms-conditions.html 200
+/refund-policy    /refund-policy.html   200
+/giveaway         /giveaway.html        200
+
+# 404
+/*                /404.html             404
