@@ -216,6 +216,8 @@ p  { color: var(--text-mid); }
 
 .nav__cta .btn { padding: 10px 22px; font-size: .78rem; }
 
+.nav__mobile { display: none; }
+
 .nav__toggle {
   display: none;
   flex-direction: column;
