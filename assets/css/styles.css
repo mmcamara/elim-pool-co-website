@@ -301,6 +301,7 @@ p  { color: var(--text-mid); }
   position: relative;
   z-index: 2;
   padding: 120px 0 80px;
+  width: 100%;
 }
 .hero__content .container {
   display: grid;
