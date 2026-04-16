@@ -96,7 +96,11 @@
 
       try {
         const data = new FormData(form);
-        await fetch('/', { method: 'POST', body: data });
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        });
         form.style.display = 'none';
         const success = document.getElementById('formSuccess');
         if (success) success.classList.add('visible');
