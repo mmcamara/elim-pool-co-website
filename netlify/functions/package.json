@@ -1,0 +1,8 @@
+{
+  "name": "elim-site-functions",
+  "private": true,
+  "description": "Netlify Functions runtime deps for elimpool.co (LiveKit token issuer).",
+  "dependencies": {
+    "livekit-server-sdk": "^2.9.0"
+  }
+}
