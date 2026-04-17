@@ -8,7 +8,7 @@ import {
   createLocalAudioTrack,
 } from 'https://esm.sh/livekit-client@2.5.7';
 
-const TOKEN_ENDPOINT = '/api/livekit-token';
+const TOKEN_ENDPOINT = '/.netlify/functions/livekit-token';
 const AGENT_LABEL = 'Moses · Elim Pool Concierge';
 const NAVY = '#126486';
 const TEAL = '#62AEB6';
