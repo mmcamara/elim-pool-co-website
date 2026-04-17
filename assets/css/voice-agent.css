@@ -1,0 +1,293 @@
+/* ============================================================
+   Elim Pool Co. — Voice Agent Widget
+   Floating "Let's Chat" button + popup with live visualizer
+   ============================================================ */
+
+.va-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9998;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px 14px 16px;
+  border: none;
+  border-radius: 999px;
+  background: var(--navy, #126486);
+  color: var(--white, #fff);
+  font-family: var(--font-h, 'Montserrat', sans-serif);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .01em;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(18, 100, 134, .35);
+  transition: transform .2s var(--ease, cubic-bezier(.4,0,.2,1)),
+              box-shadow .2s var(--ease, cubic-bezier(.4,0,.2,1)),
+              background .2s var(--ease, cubic-bezier(.4,0,.2,1));
+}
+
+.va-fab:hover {
+  transform: translateY(-2px);
+  background: #0f5775;
+  box-shadow: 0 14px 36px rgba(18, 100, 134, .45);
+}
+
+.va-fab:focus-visible {
+  outline: 3px solid var(--teal, #62AEB6);
+  outline-offset: 3px;
+}
+
+.va-fab__icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.va-fab[aria-expanded="true"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px) scale(.95);
+}
+
+/* ── Popup ── */
+.va-popup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  height: 460px;
+  max-height: calc(100vh - 48px);
+  background: var(--white, #fff);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(12, 31, 39, .28);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-b, 'DM Sans', sans-serif);
+  color: var(--text, #1e3540);
+  transform: translateY(16px) scale(.96);
+  opacity: 0;
+  transition: transform .25s var(--ease, cubic-bezier(.4,0,.2,1)),
+              opacity .25s var(--ease, cubic-bezier(.4,0,.2,1));
+}
+
+.va-popup.is-open {
+  display: flex;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Header */
+.va-popup__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, var(--navy, #126486) 0%, #0f5775 100%);
+  color: var(--white, #fff);
+}
+
+.va-popup__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .15);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.va-popup__avatar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--teal, #62AEB6);
+  border: 2px solid var(--navy, #126486);
+}
+
+.va-popup__avatar svg {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.va-popup__title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.va-popup__title strong {
+  display: block;
+  font-family: var(--font-h, 'Montserrat', sans-serif);
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+}
+
+.va-popup__title span {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, .75);
+  margin-top: 2px;
+}
+
+.va-popup__close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+
+.va-popup__close:hover {
+  background: rgba(255, 255, 255, .15);
+}
+
+.va-popup__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Body */
+.va-popup__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  background: linear-gradient(180deg, #f8fbfc 0%, #fff 60%);
+  text-align: center;
+}
+
+.va-popup__viz {
+  width: 240px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+}
+
+.va-popup__status {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--text-mid, #4a6572);
+  min-height: 20px;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+
+.va-popup__hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-light, #7a9baa);
+  max-width: 240px;
+}
+
+/* Footer */
+.va-popup__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 18px 18px;
+  background: #fff;
+  border-top: 1px solid var(--border, #ddedf1);
+}
+
+.va-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+  color: var(--text, #1e3540);
+  background: var(--teal-bg, #f0f8fa);
+}
+
+.va-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.va-btn:hover {
+  transform: translateY(-1px);
+}
+
+.va-btn--primary {
+  width: 64px;
+  height: 64px;
+  background: var(--navy, #126486);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(18, 100, 134, .35);
+}
+
+.va-btn--primary:hover {
+  background: #0f5775;
+}
+
+.va-btn--danger {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.va-btn--danger:hover {
+  background: #c0392b;
+}
+
+.va-btn[aria-pressed="true"] {
+  background: var(--navy, #126486);
+  color: #fff;
+}
+
+.va-btn[disabled] {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* State indicators on the viz wrapper */
+.va-popup[data-state="idle"] .va-popup__status::before { content: ""; }
+.va-popup[data-state="connecting"] .va-popup__status { color: var(--navy, #126486); }
+.va-popup[data-state="listening"] .va-popup__status { color: var(--teal, #62AEB6); }
+.va-popup[data-state="speaking"] .va-popup__status { color: var(--navy, #126486); }
+.va-popup[data-state="error"] .va-popup__status { color: #c0392b; }
+
+/* Mobile */
+@media (max-width: 480px) {
+  .va-popup {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    height: 70vh;
+    max-height: 560px;
+    border-radius: 18px;
+  }
+  .va-fab {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .va-popup,
+  .va-fab {
+    transition: none;
+  }
+}
